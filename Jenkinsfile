@@ -12,13 +12,13 @@ pipeline {
 					sh '''
 						echo """
 						{
-							"clientID": "${clientID}"
-							"clientSecret": "${clientSecret}"
-							"tenantID": "${tenantID}"
+							"clientID": "${env.clientID}"
+							"clientSecret": "${env.clientSecret}"
+							"tenantID": "${env.tenantID}"
 						}
 						""" > payload.json
 
-						curl --header "X-Vault-Token $TOKEN --request POST \
+						curl --header "X-Vault-Token $TOKEN" --request POST \
 						--data @payload.json" http://127.0.0.1:8200/v1/secret/${projectName}/creds
 					'''
 				}
