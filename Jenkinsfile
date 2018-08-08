@@ -20,17 +20,16 @@ pipeline {
 
 						rm payload.json
 					"""
-				
-					sh '''
-						echo """{"policy": "path 'secret/$projectName/creds' {capabilities = ['read']}"} """ > payload2.json
-					'''
-					sh 'cat payload2.json'
+					script{
+						writeFile(file: "payload.json", text: """{"policy": "path 'secret/$projectName/creds' {capabilities = ['read']}"}""")
+					}
+					sh 'cat payload.json'
 
 					sh """
 						curl --header "X-Vault-Token: $TOKEN" --request PUT \
-						--data @payload2.json http://127.0.0.1:8200/v1/sys/${projectName}-policy
+						--data @payload.json http://127.0.0.1:8200/v1/sys/${projectName}-policy
 
-						rm payload2.json
+						rm payload.json
 					"""
 				}
 
