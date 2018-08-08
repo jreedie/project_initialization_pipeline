@@ -11,7 +11,7 @@ pipeline {
 					}
 					}""")
 					sh 'cat payload.json'
-				}
+				
 
 				
 			}
