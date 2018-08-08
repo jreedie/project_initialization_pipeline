@@ -14,10 +14,10 @@ pipeline {
 				sh 'cat payload.json'
 
 				withCredentials([string(credentialsId: 'root_token', variable: 'TOKEN')]) {	
-					sh '''
+					sh """
 						curl --header "X-Vault-Token $TOKEN" --request POST \
 						--data @payload.json http://127.0.0.1:8200/v1/secret/${projectName}/creds
-					'''
+					"""
 				}
 
 				
