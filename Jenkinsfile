@@ -6,7 +6,7 @@ pipeline {
 			steps {
 				
 					writeFile(file: "payload.json",
-					text: """{"policy": "path \"secret/$projectName/creds\" {\n\tcapabilities = ["read"]\n\t}"\n}""")
+					text: """{"policy": "path \"secret/$projectName/creds\" {\n\tcapabilities = ["read"]\n}"\n}}""")
 					sh 'cat payload.json'
 				
 
