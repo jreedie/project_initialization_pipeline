@@ -24,7 +24,7 @@ pipeline {
 					text: """{"policy": "path \"secret/$projectName/creds\"" {
 						capabilities = ["read"]
 					}
-					})
+					}""")
 					sh 'cat payload.json'
 				}
 
