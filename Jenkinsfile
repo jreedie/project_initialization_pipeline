@@ -6,10 +6,10 @@ pipeline {
 			steps {
 				sh 'docker run --rm cli-image123 $subID $projectName > output.json'
 				script{ 
-				//	json = readJSON file: 'output.json'
-				//	writeFile(file: "payload.json", 
-				//	text: """{\n\t"clientID": "${json.appId}",\n\t"clientSecret": "${json.password}",\n\t"tenantID": "${json.tenant}"\n}
-				//	""")
+					json = readJSON file: 'output.json'
+					writeFile(file: "payload.json", 
+					text: """{\n\t"clientID": "${json.appId}",\n\t"clientSecret": "${json.password}",\n\t"tenantID": "${json.tenant}"\n}
+					""")
 				}
 				sh 'cat payload.json'
 
