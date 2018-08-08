@@ -7,6 +7,7 @@ pipeline {
 				sh '''
 					docker images
 					docker run cli-image > output.txt
+					cat output.txt
 				'''
 				
 			}
