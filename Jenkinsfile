@@ -21,8 +21,7 @@ pipeline {
 						rm payload.json
 					"""
 				
-					writeFile(file: "payload.json",
-					text: "{"policy": "path 'secret/$projectName/creds' {capabilities = ['read']}"}")
+					writeFile(file: "payload.json", text: "{"policy": "path 'secret/$projectName/creds' {capabilities = ['read']}"}")
 					sh 'cat payload.json'
 
 					sh """
