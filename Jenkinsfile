@@ -5,9 +5,10 @@ pipeline {
 		stage("Resource Group & Credential Creation") {
 			steps {
 				sh 'docker run cli-image > output.json'
-				json = readJSON file: 'output.json'
-				echo "${json.appID}"	
-	
+				script{ 
+					json = readJSON file: 'output.json'
+					echo "${json.appID}"	
+				}
 
 				
 			}
