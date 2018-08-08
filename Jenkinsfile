@@ -7,13 +7,14 @@ pipeline {
 				sh 'docker run cli-image > output.json'
 				script{ 
 					json = readJSON file: 'output.json'
-					sh '''
-						echo """
-							"clientID": "${json.appId}"
-							"clientSecret": "${json.password}"
-							"tenantID": "${json.tenant}"
-						""" > payload.json
-					'''
+					writeFile(file: "payload.json", 
+					text: """
+						{
+							'clientID': '${json.appId}'
+							'clientSecret': '${json.password}'
+							'tenantID': '${json.tenant}'
+						}
+					""")
 					sh 'cat payload.json'
 				}
 
