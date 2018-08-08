@@ -20,7 +20,7 @@ pipeline {
 
 						rm payload.json
 					"""
-				}
+				
 					writeFile(file: "payload.json",
 					text: """{"policy": "path \"secret/$projectName/creds\" {\n\tcapabilities = ["read"]\n}"\n}""")
 					sh 'cat payload.json'
@@ -31,7 +31,7 @@ pipeline {
 
 						rm payload.json
 					"""
-				
+				}
 
 				
 			}
