@@ -23,7 +23,7 @@ pipeline {
 				
 					sh """
 						curl --header "X-Vault-Token: $TOKEN" --request POST \
-						-d '{"policy":"{"path":{'secrets/{$projectName}/creds':{capabilities:['read']}}}"}' \
+						-d '{"policy":"{"path:{\'secrets/{$projectName}/creds\':{capabilities:[\'read\']}}}"}' \
 						http://127.0.0.1:8200/v1/sys/${projectName}-policy
 
 						rm payload.json
