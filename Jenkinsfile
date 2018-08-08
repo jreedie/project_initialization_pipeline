@@ -8,8 +8,8 @@ pipeline {
 				script{ 
 					json = readJSON file: 'output.json'
 					writeFile(file: "payload.json", 
-					text: '''{\n\t"clientID": "${json.appId}"\n\t"clientSecret": "${json.password}"\n\t"tenantID": "${json.tenant}"\n}
-					''')
+					text: """{\n\t"clientID": "${json.appId}"\n\t"clientSecret": "${json.password}"\n\t"tenantID": "${json.tenant}"\n}
+					""")
 				}
 				sh 'cat payload.json'
 
