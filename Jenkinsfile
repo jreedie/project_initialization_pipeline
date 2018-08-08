@@ -7,7 +7,7 @@ pipeline {
 				sh 'docker run cli-image > output.json'
 				script{ 
 					json = readJSON file: 'output.json'
-					echo "${json.appID}"	
+					echo "${json.appId}"	
 				}
 
 				
