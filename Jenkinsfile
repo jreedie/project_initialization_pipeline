@@ -24,8 +24,8 @@ pipeline {
 					sh """
 
 
-						curl --header "X-Vault-Token: $TOKEN" --request POST \
-						-d "{ \"policy\": \"path 'secret/project/creds' { capabilities = ['read'] }\"}" \
+						curl --header \\"X-Vault-Token: $TOKEN\\" --request POST \
+						-d \\"{ \\"policy\\": \\"path \\'secret/project/creds\\' { capabilities = [\\'read\\'] }\\"}\\" \
 						http://127.0.0.1:8200/v1/sys/${projectName}-policy
 
 						
