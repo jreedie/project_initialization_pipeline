@@ -23,9 +23,12 @@ pipeline {
 				
 					sh """
 
+						echo '''{ \\"policy\\": \\"path \\'secret/project/creds\\' { capabilities = [\\'read\\'] }\\"}''' > payload.json
+
+						cat payload.json
 
 						curl --header \\"X-Vault-Token: $TOKEN\\" --request POST \
-						-d \\"{ \\"policy\\": \\"path \\'secret/project/creds\\' { capabilities = [\\'read\\'] }\\"}\\" \
+						--data @payload.json  \
 						http://127.0.0.1:8200/v1/sys/${projectName}-policy
 
 						
