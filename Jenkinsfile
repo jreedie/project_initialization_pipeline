@@ -22,7 +22,7 @@ pipeline {
 					"""
 				
 					writeFile(file: "payload.json", 
-					text: """{ "policy": "path 'secret/project/creds' { capabilities = ['read'] }"}"""
+					text: """{ "policy": "path 'secret/project/creds' { capabilities = ['read'] }"}""")
 
 					sh """
 
