@@ -45,7 +45,7 @@ pipeline {
 						json = readJSON file: 'roleID.json'
 						sh """
 							curl --header "X-Vault-Token: $TOKEN" --request POST \
-							-d '{"roleID": "${json.data.role_id}"}' http://127.0.0.1:8200/v1/secret/roles/${projectName}'
+							-d '{"roleID": "${json.data.role_id}"}' http://127.0.0.1:8200/v1/secret/roles/${projectName}
 						"""
 					}
 
