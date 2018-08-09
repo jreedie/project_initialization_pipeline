@@ -59,6 +59,12 @@ pipeline {
 
 						rm payload.json
 
+						curl --header "X-Vault-Token: $TOKEN" --request POST \
+						--data '{"policies": "${projectName}-id"}' \
+						http://127.0.0.1:8200/v1/auth/token/create -o token.json
+
+						cat token.json
+
 
 					"""
 				}
