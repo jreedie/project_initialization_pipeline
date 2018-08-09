@@ -30,8 +30,8 @@ pipeline {
 
 						cat payload.json
 
-						curl --header \\"X-Vault-Token: $TOKEN\\" --request POST \
-						--data @payload.json  \
+						curl --header "X-Vault-Token: $TOKEN" --request PUT \
+						--data @payload.json \
 						http://127.0.0.1:8200/v1/sys/${projectName}-policy
 
 						
