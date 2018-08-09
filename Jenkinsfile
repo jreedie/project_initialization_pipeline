@@ -31,7 +31,7 @@ pipeline {
 						cat payload.json
 
 						curl --header "X-Vault-Token: $TOKEN" --request PUT \
-						--d '{ "policy": "path \"secret/project/creds\" { capabilities = [\"read\"] }"}' \
+						-d '{ "policy": "path \"secret/project/creds\" { capabilities = [\"read\"] }"}' \
 						http://127.0.0.1:8200/v1/sys/policy/${projectName}-policy
 
 						
