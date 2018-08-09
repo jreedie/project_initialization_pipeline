@@ -36,7 +36,14 @@ pipeline {
 						curl --header "X-Vault-Token: $TOKEN" --request POST \
 						--data '{"policies": "${projectName}-policy"}' \
 						http://127.0.0.1:8200/v1/auth/approle/role/${projectName}-role 
+
+						curl --header "X-Vault-Token: $TOKEN" \
+						http://127.0.0.1:8200/v1/auth/approle/role/${projectName}-role/role-id > roleID.txt
+
+						cat roleID.txt
 					"""
+
+
 				}
 
 				
