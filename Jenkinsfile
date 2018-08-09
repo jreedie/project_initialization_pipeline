@@ -21,9 +21,12 @@ pipeline {
 						rm payload.json
 					"""
 				
+					writeFile(file: "payload.json", 
+					text: """{ "policy": "path 'secret/project/creds' { capabilities = ['read'] }"}"""
+
 					sh """
 
-						echo '''{ \\"policy\\": \\"path \\'secret/project/creds\\' { capabilities = [\\'read\\'] }\\"}''' > payload.json
+						
 
 						cat payload.json
 
