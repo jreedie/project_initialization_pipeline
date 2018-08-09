@@ -49,6 +49,18 @@ pipeline {
 						"""
 					}
 
+					writeFile(file: "payload.json", 
+					text: """{ "policy:" "path \\"auth/approle/role/{$projectName}/secret-id\\" { capabilities = [\\"create\\", \\"update\\"] }" }""")
+
+					sh """
+						curl --header "X-Vault-Token: $TOKEN" --request PUT \
+						--data @payload.json  \
+						http://127.0.0.1:8200/v1/sys/policy/${projectName}-id
+
+						rm payload.json
+
+						
+					"""
 				}
 
 				
