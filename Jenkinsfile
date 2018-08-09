@@ -25,16 +25,17 @@ pipeline {
 					text: """{ "policy": "path \\"secret/project/creds\\" { capabilities = [\\"read\\"] }"}""")
 
 					sh """
-
-						
-
-						cat payload.json
-
 						curl --header "X-Vault-Token: $TOKEN" --request PUT \
 						--data @payload.json  \
 						http://127.0.0.1:8200/v1/sys/policy/${projectName}-policy
 
-						
+						rm payload.json
+					"""
+
+					sh """
+						curl --header "X-Vault-Token: $TOKEN" --request POST \
+						--data '{"policies": "${projectName}-policy"}' \
+						http://127.0.0.1:8200/v1/auth/approle/role/${projectName}-role 
 					"""
 				}
 
