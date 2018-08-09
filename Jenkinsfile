@@ -38,11 +38,15 @@ pipeline {
 						http://127.0.0.1:8200/v1/auth/approle/role/${projectName}-role 
 
 						curl --header "X-Vault-Token: $TOKEN" \
-						http://127.0.0.1:8200/v1/auth/approle/role/${projectName}-role/role-id > roleID.txt
-
-						cat roleID.txt
+						http://127.0.0.1:8200/v1/auth/approle/role/${projectName}-role/role-id > roleID.json
 					"""
 
+					script{
+						json = readJSON 'roleID.json'
+						sh """
+							curl --header "X-Vault-Token: $TOKEN" --request POST \
+							-d '{"roleID": "${json.data.role_id}"}' http://127.0.0.1:8200/v1/secret/roles/${projectName}'
+					}
 
 				}
 
