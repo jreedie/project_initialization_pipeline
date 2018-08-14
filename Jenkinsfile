@@ -50,7 +50,7 @@ pipeline {
 					}
 
 					writeFile(file: "payload.json", 
-					text: """{ "policy": "path \\"auth/approle/role/{$projectName}/secret-id\\" { capabilities = [\\"create\\", \\"update\\"] }" }""")
+					text: """{ "policy": "path \\"auth/approle/role/'$projectName'-role/secret-id\\" { capabilities = [\\"create\\", \\"update\\"] }" }""")
 
 					sh """
 						curl --header "X-Vault-Token: $TOKEN" --request PUT \
