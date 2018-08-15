@@ -21,7 +21,7 @@ pipeline {
 					cd ..
 					rm -rf ${projectName}-tmp
 
-					curl -u "repomaker:Repomaker1" -X PUT -d '{"permission: "admin"}' "https://api.github.com/repos/repomaker/${projectName}/collaborators/${github_username}"
+					curl -u "repomaker:Repomaker1" -X PUT -d '{"permission": "admin"}' "https://api.github.com/repos/repomaker/${projectName}/collaborators/${github_username}"
 				'''
 			}
 		}
