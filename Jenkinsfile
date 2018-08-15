@@ -5,7 +5,6 @@ pipeline {
 		stage("Create repo"){
 			steps{
 				sh '''
-					rm -rf ${projectName}-tmp
 					mkdir ${projectName}-tmp
 					cd ${projectName}-tmp
 
@@ -22,7 +21,7 @@ pipeline {
 					cd ..
 					rm -rf ${projectName}-tmp
 
-					curl -u "repomaker:Repomaker1" -X PUT -d '' 'https://api.github.com/repos/repomaker/${projectName}/collaborators/${github_username}'
+					curl -u "repomaker:Repomaker1" -X PUT -d '' 'https://api.github.com/repos/repomaker/"${projectName}"/collaborators/"${github_username}"'
 				'''
 			}
 		}
