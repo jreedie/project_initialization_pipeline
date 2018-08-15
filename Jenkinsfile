@@ -5,6 +5,7 @@ pipeline {
 		stage("Create repo"){
 			steps{
 				sh '''
+					rm -rf ${projectName}-tmp
 					mkdir ${projectName}-tmp
 					cd ${projectName}-tmp
 
