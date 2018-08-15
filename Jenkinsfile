@@ -32,14 +32,14 @@ pipeline {
 					jobDsl scriptText: """
 						multibranchPipelineJob('${projectName}') {
 							branchSources{
-								GitHub {
+								github {
 									scanCredentialsId('repo_creds')
 									repoOwner('repomaker')
 									repository('${projectName}')
 								}
 							}
 						}
-					""", sandbox: true
+					"""
 				}
 			}
 		}
