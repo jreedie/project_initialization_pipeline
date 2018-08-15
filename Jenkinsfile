@@ -2,6 +2,27 @@ pipeline {
 	agent { label 'master' }
 
 	stages{
+		stage("Create repo"){
+			steps{
+				sh '''
+					mkdir '$projectName'-tmp
+					cd '$projectName'-tmp
+
+					curl -u 'repomaker:Repomaker1' https://api.github.com/user/repos \
+						-d '{"name": "$projectName"}'
+
+					git init
+					touch README.md
+					git add README.md
+					git commit -m "initial commit"
+					git remote add origin https://github.com/repomaker/'$projectName'.git
+					git push -u https://repomaker:Repomaker1@github.com/repomaker/'$projectName'.git
+
+					rm -rf '$projectName'-tmp
+				'''
+			}
+		}
+
 		stage("Resource Group & Credential Creation") {
 			steps {
 				sh 'docker run --rm cli-image $subID $projectName > output.json'
@@ -72,5 +93,7 @@ pipeline {
 				
 			}
 		}
+
+
 	}
 }
