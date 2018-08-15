@@ -10,7 +10,7 @@ pipeline {
 					cd ${projectName}-tmp
 
 					curl -u 'repomaker:Repomaker1' https://api.github.com/user/repos \
-						--data '{"name": "${projectName}"}'
+						--data '{"name": "'${projectName}'"}'
 
 					git init
 					touch README.md
