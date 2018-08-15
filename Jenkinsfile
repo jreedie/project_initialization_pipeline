@@ -26,6 +26,24 @@ pipeline {
 			}
 		}
 
+		stage("Create project pipeline"){
+			steps{
+				script{
+					jobDsl scriptText: """
+						multibranchPipelineJob('${projectName}') {
+							branchSources{
+								GitHub {
+									scanCredentialsId('repo_creds')
+									repoOwner('repomaker')
+									repository('${projectName}')
+								}
+							}
+						}
+					"""
+				}
+			}
+		}
+
 		stage("Resource Group & Credential Creation") {
 			steps {
 				sh 'docker run --rm cli-image $subID $projectName > output.json'
