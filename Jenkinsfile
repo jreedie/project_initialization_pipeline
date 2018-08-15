@@ -19,7 +19,10 @@ pipeline {
 					git remote add origin https://github.com/repomaker/${projectName}.git
 					git push -u https://repomaker:Repomaker1@github.com/repomaker/${projectName}.git
 
+					cd ..
 					rm -rf ${projectName}-tmp
+
+					curl -u "repomaker:Repomaker1" -X PUT -d '' 'https://api.github.com/repos/repomaker/${projectName}/collaborators/${github_username}'
 				'''
 			}
 		}
