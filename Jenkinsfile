@@ -127,7 +127,7 @@ pipeline {
 				       "id": "",
 				       "username": "user",
 				       "password": "",
-				       "$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"
+				       "\$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"
 				     }
 				   } 
 				""")
