@@ -55,7 +55,6 @@ pipeline {
 					text: """{\n\t"subID": "$subID",\n\t"clientID": "${json.appId}",\n\t"clientSecret": "${json.password}",\n\t"tenantID": "${json.tenant}"\n}
 					""")
 				}
-				sh 'cat payload.json'
 
 				withCredentials([string(credentialsId: 'root_token', variable: 'TOKEN')]) {	
 					sh """
@@ -106,10 +105,6 @@ pipeline {
 						curl --header "X-Vault-Token: $TOKEN" --request POST \
 						--data '{"policies": "${projectName}-id"}' \
 						http://127.0.0.1:8200/v1/auth/token/create -o token.json
-
-						cat token.json
-
-
 					"""
 				}
 
@@ -122,12 +117,12 @@ pipeline {
 				
 				script{
 					sh """
+						set +x
 						curl -X POST "http://jreedie:jdem99@localhost:8080/job/${projectName}-folder/credentials/store/folder/domain/_/createCredentials" \
 						--data-urlencode 'json={"": "0", "credentials": {"scope": "GLOBAL", "id": "", "username": "user", "password": "", "\$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"}}' \
 						 
 					"""
 					json = readJSON file: 'token.json'
-					echo "${json.auth.client_token}"
 					injectCreds("$projectName", "${json.auth.client_token}")
 				}
 			}	
