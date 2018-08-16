@@ -126,7 +126,7 @@ pipeline {
 						--data-urlencode 'json={"": "0", "credentials": {"scope": "GLOBAL", "id": "", "username": "user", "password": "", "\$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"}}' \
 						 
 					"""
-					json = readJson file: 'token.json'
+					json = readJSON file: 'token.json'
 					echo "${json.auth.client_token}"
 					injectCreds("$projectName", "${json.auth.client_token}")
 				}
