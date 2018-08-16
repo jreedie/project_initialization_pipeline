@@ -131,11 +131,11 @@ pipeline {
 				     }
 				   } 
 				""")
-				sh """
-					curl -X POST -data @payload.json "http://jreedie:jdem99@http://localhost:8080/job/${projectName}-folder/credentials/store/folder/domain/_/createCredentials" 
-				   -
-				"""
+				
 				script{
+					sh """
+						curl -X POST --data @payload.json "http://jreedie:jdem99@http://localhost:8080/job/${projectName}-folder/credentials/store/folder/domain/_/createCredentials" 
+					"""
 					json = readJson file: 'token.json'
 					echo "${json.auth.client_token}"
 					injectCreds("$projectName", "${json.auth.client_token}")
