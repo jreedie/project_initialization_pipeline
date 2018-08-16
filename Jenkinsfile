@@ -119,22 +119,12 @@ pipeline {
 
 		stage("Initialize Folder Credentials & Add Vault Token"){
 			steps{
-				writeFile(file: payload.json,
-				text: """{
-				     "": "0",
-				     "credentials": {
-				       "scope": "GLOBAL",
-				       "id": "",
-				       "username": "user",
-				       "password": "",
-				       "\$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"
-				     }
-				   } 
-				""")
 				
 				script{
 					sh """
-						curl -X POST --data @payload.json http://jreedie:jdem99@http://localhost:8080/job/${projectName}-folder/credentials/store/folder/domain/_/createCredentials 
+						curl -X POST \
+						--data-urlencode 'json={"": "0", "credentials": {"scope": "GLOBAL", "id": "", "username": "user", "password": "", "\$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"}}' \
+						http://jreedie:jdem99@http://localhost:8080/job/${projectName}-folder/credentials/store/folder/domain/_/createCredentials 
 					"""
 					json = readJson file: 'token.json'
 					echo "${json.auth.client_token}"
