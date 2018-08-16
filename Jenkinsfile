@@ -122,9 +122,9 @@ pipeline {
 				
 				script{
 					sh """
-						curl -X POST \
+						curl -X POST "http://jreedie:jdem99@localhost:8080/job/${projectName}-folder/credentials/store/folder/domain/_/createCredentials" \
 						--data-urlencode 'json={"": "0", "credentials": {"scope": "GLOBAL", "id": "", "username": "user", "password": "", "\$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"}}' \
-						http://jreedie:jdem99@http://localhost:8080/job/${projectName}-folder/credentials/store/folder/domain/_/createCredentials 
+						 
 					"""
 					json = readJson file: 'token.json'
 					echo "${json.auth.client_token}"
