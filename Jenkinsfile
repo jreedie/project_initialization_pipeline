@@ -45,6 +45,7 @@ pipeline {
 			}
 		}
 
+
 		stage("Resource Group & Credential Creation") {
 			steps {
 				sh 'docker run --rm cli-image $subID $projectName > output.json'
@@ -116,6 +117,36 @@ pipeline {
 			}
 		}
 
+		stage("Initialize Folder Credentials & Add Vault Token"){
+			steps{
+				writeFile(file: payload.json,
+				text: """{
+				     "": "0",
+				     "credentials": {
+				       "scope": "GLOBAL",
+				       "id": "",
+				       "username": "user",
+				       "password": "",
+				       "$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"
+				     }
+				   } 
+				""")
+				sh """
+					curl -X POST 'http://jreedie:jdem99@http://localhost:8080/job/test_project-folder/credentials/store/folder/domain/_/createCredentials' \
+				   --data-urlencode @payload.json
+				"""
+				script{
+					json = readJson file: 'token.json'
+					injectCreds('$projectName', '${json.auth.client_token}')
+				}
+			}	
+		}
 
+
+	}
+	post {
+		always {
+			cleanWs()
+		}
 	}
 }
