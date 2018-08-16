@@ -134,7 +134,7 @@ pipeline {
 				
 				script{
 					sh """
-						curl -X POST --data @payload.json "http://jreedie:jdem99@http://localhost:8080/job/${projectName}-folder/credentials/store/folder/domain/_/createCredentials" 
+						curl -X POST --data @payload.json http://jreedie:jdem99@http://localhost:8080/job/${projectName}-folder/credentials/store/folder/domain/_/createCredentials 
 					"""
 					json = readJson file: 'token.json'
 					echo "${json.auth.client_token}"
