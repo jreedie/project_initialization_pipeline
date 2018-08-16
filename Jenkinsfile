@@ -29,8 +29,9 @@ pipeline {
 		stage("Create project pipeline"){
 			steps{
 				script{
+					jobDsl scriptText: "folder('${projectName}-folder"
 					jobDsl scriptText: """
-						multibranchPipelineJob('${projectName}') {
+						multibranchPipelineJob('${projectName}-folder/${projectName}') {
 							branchSources{
 								github {
 									scanCredentialsId('repo_creds')
