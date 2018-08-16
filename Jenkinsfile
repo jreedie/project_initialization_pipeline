@@ -29,7 +29,7 @@ pipeline {
 		stage("Create project pipeline"){
 			steps{
 				script{
-					jobDsl scriptText: "folder('${projectName}-folder"
+					jobDsl scriptText: "folder('${projectName}-folder')"
 					jobDsl scriptText: """
 						multibranchPipelineJob('${projectName}-folder/${projectName}') {
 							branchSources{
